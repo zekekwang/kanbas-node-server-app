@@ -24,11 +24,17 @@ app.use(cors({
 }));
 
 
+// const sessionOptions = {
+//     secret: "any string",
+//     resave: false,
+//     saveUninitialized: false,
+// };
 const sessionOptions = {
-    secret: "any string",
+    secret: process.env.SESSION_SECRET || "kanbas",
     resave: false,
     saveUninitialized: false,
 };
+
 app.use(
     session(sessionOptions)
 );
@@ -50,11 +56,7 @@ app.use(
 //     }
 // }));
 
-// const sessionOptions = {
-//     secret: process.env.SESSION_SECRET || "kanbas",
-//     resave: false,
-//     saveUninitialized: false,
-// };
+
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
     sessionOptions.cookie = {
