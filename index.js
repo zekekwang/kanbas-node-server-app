@@ -10,11 +10,11 @@ import "dotenv/config";
 import session from "express-session";
 const app = express()
 app.use(express.json());
-app.use(cors({
-    credentials: true,
-    origin: process.env.NETLIFY_URL || "http://localhost:3000",
-}
-));
+// app.use(cors({
+//     credentials: true,
+//     origin: process.env.NETLIFY_URL || "http://localhost:3000",
+// }
+// ));
 // app.subscribe(express.json());
 // const sessionOptions = {
 //     secret: "any string",
@@ -24,6 +24,23 @@ app.use(cors({
 // app.use(
 //     session(sessionOptions)
 // );
+const allowedOrigins = [
+    process.env.NETLIFY_URL,
+    "http://localhost:3000",
+    "https://poetic-tanuki-df2e01.netlify.app/"
+];
+
+app.use(cors({
+    credentials: true,
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
+
 const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kanbas",
     resave: false,
