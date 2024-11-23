@@ -10,6 +10,7 @@ import "dotenv/config";
 import session from "express-session";
 const app = express()
 app.use(express.json());
+// app.subscribe(express.json());
 
 // app.use(cors({
 //     credentials: true,
@@ -22,7 +23,7 @@ app.use(cors({
     origin: true // Allow all origins
 }));
 
-app.subscribe(express.json());
+
 const sessionOptions = {
     secret: "any string",
     resave: false,
