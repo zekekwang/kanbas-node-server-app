@@ -34,11 +34,6 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: false,
 };
-
-app.use(
-    session(sessionOptions)
-);
-
 // const allowedOrigins = [
 //     process.env.NETLIFY_URL,
 //     "http://localhost:3000",
@@ -55,7 +50,6 @@ app.use(
 //         }
 //     }
 // }));
-
 
 if (process.env.NODE_ENV !== "development") {
     sessionOptions.proxy = true;
