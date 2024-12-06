@@ -82,6 +82,7 @@ import UserRoutes from "./Kanbas/Users/routes.js";
 import courses from "./Kanbas/Database/courses.js";
 import cors from "cors";
 import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
 import "dotenv/config";
 import CourseRoutes from "./Kanbas/Courses/routes.js";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
@@ -99,19 +100,35 @@ app.use(
     origin: process.env.NETLIFY_URL || "http://localhost:3000",
   })
 );
+
+// const sessionOptions = {
+//   secret: process.env.SESSION_SECRET || "kanbas",
+//   resave: false,
+//   saveUninitialized: false,
+// };
+
 const sessionOptions = {
-  secret: process.env.SESSION_SECRET || "kanbas",
-  resave: false,
-  saveUninitialized: false,
-};
+    secret: process.env.SESSION_SECRET || "kanbas",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: CONNECTION_STRING,
+      collectionName: 'sessions'
+    }),
+    cookie: {}
+  };
+
+
 if (process.env.NODE_ENV !== "development") {
   sessionOptions.proxy = true;
   sessionOptions.cookie = {
     sameSite: "none",
     secure: true,
-    domain: process.env.NODE_SERVER_DOMAIN,
+    // domain: process.env.NODE_SERVER_DOMAIN,
+    domain: process.env.REMOTE_SERVER,
   };
 }
+
 app.use(session(sessionOptions));
 app.use(express.json());
 
