@@ -30,8 +30,8 @@ export default function CourseRoutes(app){
         res.send(status);
       });
     
-    app.get("/api/courses", (req, res) => {
-        const courses = dao.findAllcourses();
+    app.get("/api/courses", async (req, res) => {
+        const courses = await dao.findAllcourses();
         res.send(courses);
     });
   }
