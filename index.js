@@ -90,35 +90,35 @@ import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 
 
 const CONNECTION_STRING =
-  process.env.MONGO_CONNECTION_STRING ||
-  "mongodb://127.0.0.1:27017/kanbas";
+    process.env.MONGO_CONNECTION_STRING ||
+    "mongodb://127.0.0.1:27017/kanbas";
 
-  mongoose.connection.on('connected', () => {
-    console.log('Mongoose connected to ' + CONNECTION_STRING);
-  });
-  
-  mongoose.connection.on('error', (err) => {
-    console.log('Mongoose connection error: ' + err);
-  });
-  
-  mongoose.connection.on('disconnected', () => {
-    console.log('Mongoose disconnected');
-  });
-  
 mongoose.connect(CONNECTION_STRING);
+
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose connected to ' + CONNECTION_STRING);
+});
+
+mongoose.connection.on('error', (err) => {
+    console.log('Mongoose connection error: ' + err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.log('Mongoose disconnected');
+});
 
 mongoose.set('debug', (collectionName, method, query, doc) => {
     console.log(`${collectionName}.${method}`, JSON.stringify(query), doc);
-  });
+});
 
 console.log(process.env.NETLIFY_URL);
 const app = express();
 app.use(
-  cors({
-    credentials: true,
-    
-    origin: process.env.NETLIFY_URL || "http://localhost:3000",
-  })
+    cors({
+        credentials: true,
+
+        origin: process.env.NETLIFY_URL || "http://localhost:3000",
+    })
 );
 
 // const sessionOptions = {
@@ -132,21 +132,21 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: CONNECTION_STRING,
-      collectionName: 'sessions'
+        mongoUrl: CONNECTION_STRING,
+        collectionName: 'sessions'
     }),
     cookie: {}
-  };
+};
 
 
 if (process.env.NODE_ENV !== "development") {
-  sessionOptions.proxy = true;
-  sessionOptions.cookie = {
-    sameSite: "none",
-    secure: true,
-    // domain: process.env.NODE_SERVER_DOMAIN,
-    domain: process.env.REMOTE_SERVER
-  };
+    sessionOptions.proxy = true;
+    sessionOptions.cookie = {
+        sameSite: "none",
+        secure: true,
+        // domain: process.env.NODE_SERVER_DOMAIN,
+        domain: process.env.REMOTE_SERVER
+    };
 }
 
 app.use(session(sessionOptions));
