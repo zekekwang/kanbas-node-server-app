@@ -86,6 +86,7 @@ import MongoStore from "connect-mongo";
 import "dotenv/config";
 import CourseRoutes from "./Kanbas/Courses/routes.js";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
+import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 
 
@@ -158,5 +159,6 @@ UserRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
 AssignmentRoutes(app);
+EnrollmentRoutes(app);
 
 app.listen(process.env.PORT || 4000);
