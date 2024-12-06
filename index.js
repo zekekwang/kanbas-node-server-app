@@ -93,6 +93,10 @@ const CONNECTION_STRING =
   "mongodb://127.0.0.1:27017/kanbas";
 mongoose.connect(CONNECTION_STRING);
 
+mongoose.set('debug', (collectionName, method, query, doc) => {
+    console.log(`${collectionName}.${method}`, JSON.stringify(query), doc);
+  });
+
 console.log(process.env.NETLIFY_URL);
 const app = express();
 app.use(
@@ -127,7 +131,7 @@ if (process.env.NODE_ENV !== "development") {
     sameSite: "none",
     secure: true,
     // domain: process.env.NODE_SERVER_DOMAIN,
-    domain: process.env.REMOTE_SERVER,
+    domain: process.env.REMOTE_SERVER
   };
 }
 
