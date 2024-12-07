@@ -24,7 +24,6 @@
 // }
 
 
-// Kanbas/Assignments/dao.js
 import assignmentModel from "./model.js";
 
 // create assignment
