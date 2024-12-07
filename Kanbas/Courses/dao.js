@@ -5,13 +5,13 @@ export function deleteCourse(courseId) {
     return model.deleteOne({ _id: courseId });
    }   
 
-export function deleteCourse(courseId) {
-    const { courses, enrollments } = Database;
-    Database.courses = courses.filter((course) => course._id !== courseId);
-    Database.enrollments = enrollments.filter(
-        (enrollment) => enrollment.course !== courseId
-    );
-}
+// export function deleteCourse(courseId) {
+//     const { courses, enrollments } = Database;
+//     Database.courses = courses.filter((course) => course._id !== courseId);
+//     Database.enrollments = enrollments.filter(
+//         (enrollment) => enrollment.course !== courseId
+//     );
+// }
 
 export function findAllcourses() {
     // return Database.courses;
