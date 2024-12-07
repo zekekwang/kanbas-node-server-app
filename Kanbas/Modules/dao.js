@@ -9,7 +9,6 @@ export function updateModule(moduleId, moduleUpdates) {
     return model.updateOne({ _id: moduleId }, moduleUpdates);
 }
 
-import model from "./model.js";
 export function deleteModule(moduleId) {
  return model.deleteOne({ _id: moduleId });
  // const { modules } = Database;
