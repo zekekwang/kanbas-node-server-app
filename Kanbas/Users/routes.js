@@ -88,6 +88,7 @@ import * as enrollmentsDao from "../Enrollments/dao.js";
 
 
 
+
 export default function UserRoutes(app) {
 
   const findCoursesForUser = async (req, res) => {
@@ -97,7 +98,7 @@ export default function UserRoutes(app) {
       return;
     }
     if (currentUser.role === "ADMIN") {
-      const courses = await courseDao.findAllCourses();
+      const courses = await courseDao.findAllcourses();
       res.json(courses);
       return;
     }
@@ -130,7 +131,7 @@ export default function UserRoutes(app) {
   };
   app.post("/api/users/:uid/courses/:cid", enrollUserInCourse);
   app.delete("/api/users/:uid/courses/:cid", unenrollUserFromCourse);
-  
+
   const createCourse = (req, res) => {
     const currentUser = req.session["currentUser"];
     const newCourse = courseDao.createCourse(req.body);
