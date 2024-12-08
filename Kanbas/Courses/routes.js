@@ -13,15 +13,6 @@ export default function CourseRoutes(app) {
 
   app.post("/api/courses/:courseId/modules", async (req, res) => {
 
-    app.post("/api/courses", async (req, res) => {
-      const course = await dao.createCourse(req.body);
-      const currentUser = req.session["currentUser"];
-      if (currentUser) {
-        await enrollmentsDao.enrollUserInCourse(currentUser._id, course._id);
-      }
-      res.json(course);
-    });
-
     const { courseId } = req.params;
     const module = {
       ...req.body,
@@ -48,6 +39,15 @@ export default function CourseRoutes(app) {
     const { courseId } = req.params;
     const status = await dao.deleteCourse(courseId);
     res.send(status);
+  });
+
+  app.post("/api/courses", async (req, res) => {
+    const course = await dao.createCourse(req.body);
+    const currentUser = req.session["currentUser"];
+    if (currentUser) {
+      await enrollmentsDao.enrollUserInCourse(currentUser._id, course._id);
+    }
+    res.json(course);
   });
 
   app.get("/api/courses", async (req, res) => {
