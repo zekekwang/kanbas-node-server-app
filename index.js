@@ -134,11 +134,11 @@ const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kanbas",
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: CONNECTION_STRING,
-        collectionName: 'sessions'
-    }),
-    cookie: {}
+    // store: MongoStore.create({
+    //     mongoUrl: CONNECTION_STRING,
+    //     collectionName: 'sessions'
+    // }),
+    // cookie: {}
 };
 
 
