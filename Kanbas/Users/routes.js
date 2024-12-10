@@ -179,7 +179,9 @@ export default function UserRoutes(app) {
     const currentUser = req.session["currentUser"];
     if (currentUser && currentUser._id === userId) {
       req.session["currentUser"] = { ...currentUser, ...userUpdates };
-    } 
+    } else {
+      console.log(`Current user ID: ${currentUser ? currentUser._id : 'null'}, User ID: ${userId}`);
+    }
     res.json(currentUser);
   };
 
