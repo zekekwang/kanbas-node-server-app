@@ -55,8 +55,6 @@
 
 
 
-//kanbas-node-server-app/Kanbas/Assignments/routes.js
-
 import * as assignmentsDao from "./dao.js";
 
 export default function AssignmentRoutes(app) {
