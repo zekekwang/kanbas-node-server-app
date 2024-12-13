@@ -21,6 +21,7 @@ export default function CourseRoutes(app) {
       course: courseId,
     };
     const newModule = await modulesDao.createModule(module);
+    console.log(newModule);
     res.send(newModule);
   });
 
